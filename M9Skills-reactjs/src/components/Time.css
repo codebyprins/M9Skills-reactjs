@@ -1,0 +1,22 @@
+.time-wrapper{
+    width: 60rem;
+    height: auto;
+    padding: 4rem;
+    background: lightgoldenrodyellow;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 1rem 1rem 2rem 0.5rem rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+}
+.time-wrapper > h2{
+    font-size: 3rem;
+}
+
+.time-wrapper > p{
+    font-size: 2rem;
+}
+
+.time-wrapper:hover{
+    transform: translateY(-2rem);
+}

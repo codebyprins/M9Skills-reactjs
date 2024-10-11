@@ -1,0 +1,115 @@
+:root{
+    --background: linear-gradient(90deg, #091428, #0A1428);
+    --goldgradient: linear-gradient(135deg, #785A28 35%, #C89B3C 55%, #785A28 65%);
+    --blue6: #091428;
+    --gold4: #C89B3C;
+    --font: #F0E6D2;
+    --magic: radial-gradient(circle, #005A82 20%, #0AC8B9);  
+    --blue: #0AC8B9;
+}
+
+html{
+    font-family: "Beaufort for LOL Bold"; 
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
+    position: relative;
+    z-index: -3;
+}
+
+.imgLeft{
+    width: 30rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+.imgRight{
+    width: 25rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -2;
+}
+
+.orb{
+    background: var(--magic);
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    animation: glow 2s linear 2s infinite alternate;
+    border: 0.3rem solid var(--gold4);
+}
+
+.poro{
+    width: 100%;
+    height: 100%;
+}
+
+.logo{
+    width: 40rem;
+}
+
+.logoImg{
+    width: 100%;
+    height: 100%;
+}
+
+.searchWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.searchTile:nth-child(1){
+    display: none;
+}
+
+.searchTile{
+    border: 0.5rem solid var(--gold4);
+    border-radius: 2rem;
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.searchLabel{
+    color: var(--font);
+    font-size: 2rem;
+}
+
+.searchBar{
+    width: 60rem;
+    padding: 1rem;
+    font-size: 3rem;
+    border-radius: 2rem;
+    border: 0.3rem solid var(--gold4);
+}
+
+@keyframes glow {
+    0%{
+        box-shadow: 0 0 3rem .5rem rgba(10, 200, 185, 100);
+    }
+    100%{
+        box-shadow: 0 0 4rem 1rem rgba(10, 200, 185, 100);
+    }
+}

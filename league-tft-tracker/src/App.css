@@ -1,0 +1,15 @@
+*, *::before, *::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+    --background: linear-gradient(90deg, #091428, #0A1428)
+    --blue6: #091428;
+    --gold4: #C89B3C;
+}
+
+html{
+  font-size: 62.5%;
+}
