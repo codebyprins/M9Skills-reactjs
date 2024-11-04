@@ -1,0 +1,33 @@
+.home {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--background);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5rem;
+    gap: 5rem;
+    position: relative;
+  }
+
+  .generalInfo{
+    padding: 4rem;
+    border: 0.3rem solid var(--highlight);
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .detailsH2{
+    text-transform: capitalize;
+  }
+
+  .rank, .level{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
