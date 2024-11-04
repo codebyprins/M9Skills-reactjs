@@ -44,10 +44,11 @@ export default async function SummonerPage({ searchParams }) {
   );
   console.log(matchDetails);
 
-  const removePrefix = (input) => {
-    const slice = (input) => {
-      const underscoreIndex = input.indexOf('_');
-    }
+  const afterUnderscore = (input) => {
+    const splitParts = input.lastIndexOf('_');
+    const selectLastPart = input.substring(splitParts + 1);
+    const format = selectLastPart.replace(/([A-Z])/g, ' $1').trim();
+    return format
   }
 
   return (
@@ -72,6 +73,7 @@ export default async function SummonerPage({ searchParams }) {
             <li className={styles.match} key={index}>
               <div className={styles.set}>
                 <p>{match.info.tft_game_type}</p>
+                <p>{afterUnderscore(match.info.tft_set_core_name)}</p>
               </div>
               {match.info.participants.map((participant) => {
                 if (participant.puuid === puuid) {
@@ -81,16 +83,26 @@ export default async function SummonerPage({ searchParams }) {
                         <p>Place:</p>
                         <h2 key={participant.puuid}>{participant.placement}</h2>
                       </div>
-                        <ul className={styles.traits}>
-                          {participant.traits.map((trait, index) => (
-                            <li className={styles.trait} key={index}>{trait.name.slice(5)}</li>
-                          ))}
-                        </ul>
-                        <ul className={styles.champions}>
-                          {participant.units.map((champion, index) => (
-                            <li className={styles.champion} key={index}>{champion.character_id.slice(5)}</li>
-                          ))}
-                        </ul>
+                      <ul className={styles.traits}>
+                        {participant.traits.map((trait, index) => (
+                          <li className={styles.trait} key={index}>
+                            <img className={styles.traitImg} src={`/assets/tft-trait/${trait.name}.png`} alt={afterUnderscore(trait.name)} title={afterUnderscore(trait.name)}></img>
+                            </li>
+                        ))}
+                      </ul>
+                      <ul className={styles.champions}>
+                        {participant.units.map((champion, index) => (
+                          <li className={styles.champion} key={index}>
+                            <img className={styles.championImg} src={`/assets/tft-champion/${champion.character_id}.png`} alt={afterUnderscore(champion.character_id)} title={afterUnderscore(champion.character_id)}></img>
+                            <div className={styles.itemsImgs}>
+                            {champion.itemNames.map((item, index) => (
+                              <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
+                            ))}
+                          </div>
+                            </li>
+                        ))}
+                        
+                      </ul>
                     </div>
                   );
                 } else {
@@ -98,7 +110,7 @@ export default async function SummonerPage({ searchParams }) {
                 }
 
               })}
-              <Link className={styles.link} href={`/tft/details?matchId=${match.metadata.match_id}&region=${region}&puuid=${account.puuid}&name=${name}&tag=${tag}`}>{'>'}</Link>
+              <Link className={styles.link} href={`/tft/details?matchId=${match.metadata.match_id}&region=${region}&server=${server}&puuid=${account.puuid}&name=${name}&tag=${tag}`}>{'>'}</Link>
             </li>
           ))}
         </ul>

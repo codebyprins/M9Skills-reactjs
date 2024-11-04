@@ -25,7 +25,6 @@
   text-transform: capitalize;
 }
 
-
 .summonerProfile{
   position: relative;
   width: 15rem;
@@ -134,6 +133,7 @@
   font-size: 1.5rem;
   color: var(--fontColor);
   padding: 0.5rem;
+  position: relative;
 }
 
 .link{
@@ -151,4 +151,25 @@
 .link:hover{
   cursor: pointer;
   color: var(--accent)
+}
+
+.traitImg, .championImg{
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+}
+
+.itemsImgs{
+  display: flex;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.item{
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
 }
