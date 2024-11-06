@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import styles from './page.module.css';
-import { after } from 'node:test';
+import Link from 'next/link';
 
 async function Details({ searchParams }) {
   const { matchId, region, server, puuid, name, tag } = await searchParams;
@@ -25,11 +25,11 @@ async function Details({ searchParams }) {
     return format
   }
   const duration = (time) => {
-    console.log(time);
     let timePlayed = Math.floor(time / 60);
 
     return timePlayed
   }
+
   return (
     <div className={styles.home}>
       <div className={styles.personalInfo}>
@@ -90,7 +90,7 @@ async function Details({ searchParams }) {
                                   : trait.style === 5
                                     ? styles.platinum
                                     : styles.displayNone
-                          }`} key={index}>{afterUnderscore(trait.name)}</li>
+                          }`} key={index}>{afterUnderscore(trait.name)}: {trait.num_units}</li>
                       ))}
                     </ul>
                   </div>
@@ -116,10 +116,10 @@ async function Details({ searchParams }) {
                               <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
                             ))}
                             <div className={styles.itemsImgs}>
-                            {unit.itemNames.map((item, index) => (
-                              <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
-                            ))}
-                          </div>
+                              {unit.itemNames.map((item, index) => (
+                                <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
+                              ))}
+                            </div>
                           </div>
                         </li>
                       ))}
@@ -134,12 +134,51 @@ async function Details({ searchParams }) {
                             <h2 className={styles.infoTitle}>{participant.riotIdGameName}</h2>
                             <h2 className={styles.infoTitle}>#{participant.riotIdTagline}</h2>
                           </div>
+                          <div className={styles.participantPlacement}>
+                            <h2 className={styles.infoTitle}>Placed:</h2>
+                            <h2 className={styles.infoTitle}>{participant.placement}</h2>
+                          </div>
                           <ul className={styles.participantTraits}>
-                            {}
+                            {participant.traits.map((trait, index) => (
+                              <li className={`${styles.participantTrait} ${trait.style === 1
+                                  ? styles.bronze
+                                  : trait.style === 2
+                                    ? styles.bronze
+                                    : trait.style === 3
+                                      ? styles.silver
+                                      : trait.style === 4
+                                        ? styles.gold
+                                        : trait.style === 5
+                                          ? styles.platinum
+                                          : styles.displayNone
+                                }`} key={index}>{afterUnderscore(trait.name)}</li>
+                            ))}
                           </ul>
                           <ul className={styles.participantChampions}>
-                            {}
+                            {participant.units.map((unit, index) => (
+                              <li className={styles.participantChampion} key={index}>
+                                <img className={`${styles.unitImg} ${unit.tier === 0
+                                  ? styles.iron
+                                  : unit.tier === 1
+                                    ? styles.bronze
+                                    : unit.tier === 2
+                                      ? styles.silver
+                                      : unit.tier === 3
+                                        ? styles.gold
+                                        : unit.tier === 4
+                                          ? styles.platinum
+                                          : styles.displayNone
+                                  }`} src={`/assets/tft-champion/${unit.character_id}.png`} alt={afterUnderscore(unit.character_id)} title={afterUnderscore(unit.character_id)}>
+                                </img>
+                                <div className={styles.participantItems}>
+                                  {unit.itemNames.map((item, index) => (
+                                    <img className={styles.participantItem} src={`/assets/tft-item/${item}.png`} key={index} alt={afterUnderscore(item)} title={afterUnderscore(item)}></img>
+                                  ))}
+                                </div>
+                              </li>
+                            ))}
                           </ul>
+                          <Link className={styles.link} href={`/tft?name=${participant.riotIdGameName}&tag=${participant.riotIdTagline}&region=${region}&server=${server}`}>{`>`}</Link>
                         </li>
                       ))}
                     </ul>

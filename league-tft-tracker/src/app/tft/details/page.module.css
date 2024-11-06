@@ -12,7 +12,7 @@
 
   .personalInfo{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 5rem;
   }
@@ -88,11 +88,12 @@
     flex-wrap: wrap;
   }
   
-  .augment, .trait, .unit{
+  .augment, .trait{
     font-size: 1.5rem;
     color: var(--fontColor);
     padding: 1rem;
     border-radius: 2rem;
+    border: 0.3rem solid var(--highlight);
   }
 
   .champions{
@@ -100,39 +101,15 @@
   }
 
   .unit{
+    font-size: 1.5rem;
+    color: var(--fontColor);
+    padding: 1rem;
+    border-radius: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     position: relative;
-  }
-
-  .displayNone{
-    display: none;
-  }
-
-  .displayBlock{
-    display: block;
-  }
-
-  .iron{
-    border: 0.3rem solid #4d4d4d;
-  }
-
-  .bronze{
-    border: 0.3rem solid #b17640;
-  }
-
-  .silver{
-    border: 0.3rem solid silver;
-  }
-
-  .gold{
-    border: 0.3rem solid gold;
-  }
-
-  .platinum{
-    border: 0.3rem solid rgb(153, 235, 208);
   }
 
 .championImg{
@@ -145,7 +122,7 @@
   display: flex;
   gap: 0.5rem;
   position: absolute;
-  bottom: -5%;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -163,7 +140,114 @@
 }
 
 .participant{
+  width: 100rem;
   border: 0.3rem solid var(--highlight);
   padding: 1rem;
   border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
+
+.participantInfo{
+  width: 20%;
+}
+
+.participantTraits, .participantChampions{
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  width: 35%;
+  border: 0.3rem solid var(--highlight);
+  padding: 1rem;
+  
+}
+
+.participantTrait, .participantChampion{
+  width: 100%;
+  padding: 0.5rem;
+  color: var(--fontColor);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.participantTrait{
+  border-radius: 2rem;
+}
+
+.participantChampion{
+  position: relative;
+}
+
+.unitImg{
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+}
+
+.participantItems{
+  display: flex;
+  gap:0.3rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.participantItem{
+  width: 1.5rem;
+  height: 1.5rem;
+  
+}
+
+/* ranking*/
+.displayNone{
+  display: none;
+}
+
+.displayBlock{
+  display: flex;
+}
+
+.iron{
+  border: 0.3rem solid #4d4d4d;
+}
+
+.bronze{
+  border: 0.3rem solid #b17640;
+}
+
+.silver{
+  border: 0.3rem solid silver;
+}
+
+.gold{
+  border: 0.3rem solid gold;
+}
+
+.platinum{
+  border: 0.3rem solid rgb(153, 235, 208);
+}
+
+.link{
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  text-decoration: none;
+  color: var(--fontColor);
+}
+
+.link:visited{
+  color: var(--fontColor);
+}
+
+.link:hover{
+  cursor: pointer;
+  color: var(--accent)
+}
+

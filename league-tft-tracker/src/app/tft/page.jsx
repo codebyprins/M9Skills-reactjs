@@ -79,13 +79,31 @@ export default async function SummonerPage({ searchParams }) {
                 if (participant.puuid === puuid) {
                   return (
                     <div className={styles.participantInfo}>
-                      <div className={styles.rank}>
+                      <div className={`${styles.rank} ${participant.placement === 1
+                    ? styles.gold
+                    : participant.placement === 2
+                      ? styles.silver
+                      : participant.placement === 3
+                        ? styles.bronze
+                        : styles.iron
+                    }`}>
                         <p>Place:</p>
                         <h2 key={participant.puuid}>{participant.placement}</h2>
                       </div>
                       <ul className={styles.traits}>
                         {participant.traits.map((trait, index) => (
-                          <li className={styles.trait} key={index}>
+                          <li className={`${styles.trait} ${trait.style === 1
+                              ? styles.bronze
+                              : trait.style === 2
+                                ? styles.bronze
+                                : trait.style === 3
+                                  ? styles.silver
+                                  : trait.style === 4
+                                    ? styles.gold
+                                    : trait.style === 5
+                                      ? styles.platinum
+                                      : styles.displayNone
+                            }`} key={index}>
                             <img className={styles.traitImg} src={`/assets/tft-trait/${trait.name}.png`} alt={afterUnderscore(trait.name)} title={afterUnderscore(trait.name)}></img>
                             </li>
                         ))}
