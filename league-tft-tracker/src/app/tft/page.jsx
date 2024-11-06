@@ -59,7 +59,7 @@ export default async function SummonerPage({ searchParams }) {
             <h1 className={styles.accounth1}>{account.gameName}</h1>
             <h3>#{account.tagLine}</h3>
             <figure className={styles.summonerProfile}>
-              <img className={styles.summonerIcon} src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/profileicon/${summoner.profileIconId}.png`} alt='summonericon'></img>
+              <img className={styles.summonerIcon} src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/profileicon/${summoner.profileIconId}.png`} alt='summoner icon not found'></img>
               <p className={styles.summonerLevel}>{summoner.summonerLevel}</p>
             </figure>
 
@@ -80,46 +80,51 @@ export default async function SummonerPage({ searchParams }) {
                   return (
                     <div className={styles.participantInfo}>
                       <div className={`${styles.rank} ${participant.placement === 1
-                    ? styles.gold
-                    : participant.placement === 2
-                      ? styles.silver
-                      : participant.placement === 3
-                        ? styles.bronze
-                        : styles.iron
-                    }`}>
+                        ? styles.gold
+                        : participant.placement === 2
+                          ? styles.silver
+                          : participant.placement === 3
+                            ? styles.bronze
+                            : styles.iron
+                        }`}>
                         <p>Place:</p>
                         <h2 key={participant.puuid}>{participant.placement}</h2>
                       </div>
                       <ul className={styles.traits}>
                         {participant.traits.map((trait, index) => (
                           <li className={`${styles.trait} ${trait.style === 1
+                            ? styles.bronze
+                            : trait.style === 2
                               ? styles.bronze
-                              : trait.style === 2
-                                ? styles.bronze
-                                : trait.style === 3
-                                  ? styles.silver
-                                  : trait.style === 4
-                                    ? styles.gold
-                                    : trait.style === 5
-                                      ? styles.platinum
-                                      : styles.displayNone
+                              : trait.style === 3
+                                ? styles.silver
+                                : trait.style === 4
+                                  ? styles.gold
+                                  : trait.style === 5
+                                    ? styles.platinum
+                                    : styles.displayNone
                             }`} key={index}>
-                            <img className={styles.traitImg} src={`/assets/tft-trait/${trait.name}.png`} alt={afterUnderscore(trait.name)} title={afterUnderscore(trait.name)}></img>
-                            </li>
+                              {afterUnderscore(trait.name)}
+                          </li>
                         ))}
                       </ul>
                       <ul className={styles.champions}>
                         {participant.units.map((champion, index) => (
                           <li className={styles.champion} key={index}>
-                            <img className={styles.championImg} src={`/assets/tft-champion/${champion.character_id}.png`} alt={afterUnderscore(champion.character_id)} title={afterUnderscore(champion.character_id)}></img>
+                            <img className={styles.championImg} src={
+                              match.info.tft_set_core_name === 'TFTSet12'
+                                ? `/assets/tft-champion/${champion.character_id}.TFT_Set12.png`
+                                : `/assets/tft-champion/${champion.character_id}.png`
+                            }
+                              alt={afterUnderscore(champion.character_id)} title={afterUnderscore(champion.character_id)}></img>
                             <div className={styles.itemsImgs}>
-                            {champion.itemNames.map((item, index) => (
-                              <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
-                            ))}
-                          </div>
-                            </li>
+                              {champion.itemNames.map((item, index) => (
+                                <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
+                              ))}
+                            </div>
+                          </li>
                         ))}
-                        
+
                       </ul>
                     </div>
                   );

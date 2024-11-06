@@ -54,7 +54,7 @@ async function Details({ searchParams }) {
                       ? styles.silver
                       : participant.placement === 3
                         ? styles.bronze
-                        : styles.displayNone
+                        : styles.iron
                     }`}>
                     <p>Place:</p>
                     <h2>{participant.placement}</h2>
@@ -62,6 +62,9 @@ async function Details({ searchParams }) {
                   <div className={styles.level}>
                     <p>Level:</p>
                     <h2>{participant.level}</h2>
+                  </div>
+                  <div className={styles.profileMatches}>
+                    <Link className={styles.otherMatches} href={`/tft?name=${name}&tag=${tag}&region=${region}&server=${server}`}>{`Other Matches`} </Link>
                   </div>
                 </div>
                 <div className={styles.generalInfo}>
@@ -110,7 +113,11 @@ async function Details({ searchParams }) {
                                   : unit.tier === 4
                                     ? styles.platinum
                                     : styles.displayNone
-                            }`} src={`/assets/tft-champion/${unit.character_id}.png`} alt={afterUnderscore(unit.character_id)} title={afterUnderscore(unit.character_id)}></img>
+                            }`} src={
+                              matchData.info.tft_set_core_name === 'TFTSet12'
+                                ? `/assets/tft-champion/${unit.character_id}.TFT_Set12.png`
+                                : `/assets/tft-champion/${unit.character_id}.png`
+                            } alt={afterUnderscore(unit.character_id)} title={afterUnderscore(unit.character_id)}></img>
                           <div className={styles.itemsImgs}>
                             {unit.itemNames.map((item, index) => (
                               <img className={styles.item} src={`/assets/tft-item/${item}.png`} alt={afterUnderscore(item)} title={afterUnderscore(item)} key={index}></img>
@@ -157,9 +164,7 @@ async function Details({ searchParams }) {
                           <ul className={styles.participantChampions}>
                             {participant.units.map((unit, index) => (
                               <li className={styles.participantChampion} key={index}>
-                                <img className={`${styles.unitImg} ${unit.tier === 0
-                                  ? styles.iron
-                                  : unit.tier === 1
+                                <img className={`${styles.unitImg} ${unit.tier === 1
                                     ? styles.bronze
                                     : unit.tier === 2
                                       ? styles.silver
@@ -168,7 +173,12 @@ async function Details({ searchParams }) {
                                         : unit.tier === 4
                                           ? styles.platinum
                                           : styles.displayNone
-                                  }`} src={`/assets/tft-champion/${unit.character_id}.png`} alt={afterUnderscore(unit.character_id)} title={afterUnderscore(unit.character_id)}>
+                                  }`} src=
+                                    {matchData.info.tft_set_core_name === 'TFTSet12'
+                                      ? `/assets/tft-champion/${unit.character_id}.TFT_Set12.png`
+                                      : `/assets/tft-champion/${unit.character_id}.png`
+                                  }
+                                   alt={afterUnderscore(unit.character_id)} title={afterUnderscore(unit.character_id)}>
                                 </img>
                                 <div className={styles.participantItems}>
                                   {unit.itemNames.map((item, index) => (
@@ -178,7 +188,7 @@ async function Details({ searchParams }) {
                               </li>
                             ))}
                           </ul>
-                          <Link className={styles.link} href={`/tft?name=${participant.riotIdGameName}&tag=${participant.riotIdTagline}&region=${region}&server=${server}`}>{`>`}</Link>
+                          <Link className={styles.link} href={`/tft/details?matchId=${matchId}&region=${region}&server=${server}&puuid=${participant.puuid}&name=${participant.riotIdGameName}&tag=${participant.riotIdTagline}`}>{`>`}</Link>
                         </li>
                       ))}
                     </ul>
